@@ -8,9 +8,6 @@
 
 <meta name="description" content="أداة مجانية لضغط الصور وتقليل حجمها مع الحفاظ على الجودة. تدعم JPG وPNG وWEBP وتعمل مباشرة من المتصفح.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <style>
 *{
   margin:0;
@@ -41,7 +38,6 @@ h1{
   color:#2563eb;
   text-align:center;
   margin-bottom:15px;
-  font-size:32px;
 }
 
 .subtitle{
@@ -58,15 +54,6 @@ h1{
   padding:40px 20px;
   text-align:center;
   cursor:pointer;
-  transition:.3s;
-}
-
-.upload-box:hover{
-  background:#dbeafe;
-}
-
-.upload-box p{
-  color:#475569;
 }
 
 input[type=file]{
@@ -105,6 +92,7 @@ input[type=range]{
   margin-top:10px;
   color:#2563eb;
   font-weight:bold;
+  font-size:22px;
 }
 
 .stats{
@@ -128,7 +116,18 @@ input[type=range]{
 }
 
 .stat-box strong{
-  font-size:20px;
+  font-size:22px;
+}
+
+#savingBox{
+  display:none;
+  margin-top:20px;
+  background:#ecfdf5;
+  color:#166534;
+  padding:16px;
+  border-radius:16px;
+  text-align:center;
+  font-weight:bold;
 }
 
 button{
@@ -137,14 +136,14 @@ button{
   border:none;
   background:#2563eb;
   color:#fff;
-  padding:16px;
+  padding:18px;
   border-radius:16px;
   font-size:18px;
   cursor:pointer;
 }
 
-button:hover{
-  background:#1d4ed8;
+button:disabled{
+  opacity:.7;
 }
 
 #downloadLink{
@@ -154,7 +153,7 @@ button:hover{
   background:#16a34a;
   color:#fff;
   text-decoration:none;
-  padding:16px;
+  padding:18px;
   border-radius:16px;
 }
 
@@ -162,23 +161,7 @@ button:hover{
   margin-top:20px;
   text-align:center;
   color:#64748b;
-  font-size:14px;
   line-height:1.8;
-}
-
-@media(max-width:600px){
-
-  .card{
-    padding:20px;
-  }
-
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  h1{
-    font-size:26px;
-  }
 }
 </style>
 </head>
@@ -192,11 +175,11 @@ button:hover{
     <h1>ضغط الصور مجانًا</h1>
 
     <p class="subtitle">
-      قلّل حجم صورك مع الحفاظ على الجودة، وحسّن سرعة موقعك وتجربة المستخدم.
+      قلّل حجم صورك مع الحفاظ على الجودة وتحسين سرعة موقعك.
     </p>
 
     <label class="upload-box" for="imageInput">
-      <p>اضغط لاختيار صورة أو اسحبها هنا</p>
+      اضغط لاختيار صورة
     </label>
 
     <input type="file" id="imageInput" accept="image/*">
@@ -207,14 +190,12 @@ button:hover{
 
       <div class="controls">
 
-        <label for="qualityRange">
-          مستوى الجودة
-        </label>
+        <label for="qualityRange">مستوى الجودة</label>
 
-        <input type="range" id="qualityRange" min="10" max="100" value="80">
+        <input type="range" id="qualityRange" min="10" max="100" value="70">
 
-        <div class="quality-value">
-          <span id="qualityText">80%</span>
+        <div class="quality-value" id="qualityText">
+          70%
         </div>
 
       </div>
@@ -223,28 +204,30 @@ button:hover{
 
         <div class="stat-box">
           <span>الحجم الأصلي</span>
-          <strong id="originalSize">0 KB</strong>
+          <strong id="originalSize">—</strong>
         </div>
 
         <div class="stat-box">
           <span>الحجم بعد الضغط</span>
-          <strong id="compressedSize">0 KB</strong>
+          <strong id="compressedSize">—</strong>
         </div>
 
       </div>
+
+      <div id="savingBox"></div>
 
       <button id="compressBtn">
         ضغط الصورة
       </button>
 
-      <a id="downloadLink" download="webbag-compressed.jpg">
+      <a id="downloadLink" download>
         تنزيل الصورة المضغوطة
       </a>
 
     </div>
 
     <p class="note">
-      تدعم الأداة JPG وPNG وWEBP وتعمل بالكامل داخل متصفحك دون رفع الصور إلى أي خادم.
+      تعمل الأداة داخل متصفحك مباشرة دون رفع الصور إلى أي خادم.
     </p>
 
   </div>
@@ -265,6 +248,8 @@ const compressedSize = document.getElementById('compressedSize');
 const compressBtn = document.getElementById('compressBtn');
 const downloadLink = document.getElementById('downloadLink');
 
+const savingBox = document.getElementById('savingBox');
+
 let selectedFile;
 
 qualityRange.addEventListener('input', () => {
@@ -284,6 +269,7 @@ imageInput.addEventListener('change', e => {
 
   compressedSize.textContent = '—';
 
+  savingBox.style.display = 'none';
   downloadLink.style.display = 'none';
 
   previewSection.style.display = 'block';
@@ -296,31 +282,84 @@ compressBtn.addEventListener('click', () => {
     return;
   }
 
-  const quality = qualityRange.value / 100;
-
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  compressBtn.disabled = true;
+  compressBtn.textContent = 'جاري الضغط...';
 
   const img = new Image();
 
   img.onload = () => {
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
 
     canvas.width = img.width;
     canvas.height = img.height;
 
     ctx.drawImage(img, 0, 0);
 
+    const quality = qualityRange.value / 100;
+
+    let outputType = selectedFile.type;
+
+    if(
+      outputType !== 'image/jpeg' &&
+      outputType !== 'image/webp'
+    ){
+      outputType = 'image/jpeg';
+    }
+
     canvas.toBlob(blob => {
 
+      compressBtn.disabled = false;
+      compressBtn.textContent = 'ضغط الصورة';
+
+      if(!blob){
+        alert('تعذر ضغط الصورة.');
+        return;
+      }
+
+      const originalKB = selectedFile.size / 1024;
+      const compressedKB = blob.size / 1024;
+
+      originalSize.textContent =
+        originalKB.toFixed(1) + ' KB';
+
       compressedSize.textContent =
-        (blob.size / 1024).toFixed(1) + ' KB';
+        compressedKB.toFixed(1) + ' KB';
+
+      const difference =
+        ((originalKB - compressedKB) / originalKB) * 100;
+
+      if(difference > 0){
+
+        savingBox.style.display = 'block';
+
+        savingBox.textContent =
+          'تم تقليل الحجم بنسبة ' +
+          difference.toFixed(1) + '%';
+      }else{
+
+        savingBox.style.display = 'block';
+
+        savingBox.textContent =
+          'الصورة الأصلية مضغوطة بالفعل.';
+      }
 
       const url = URL.createObjectURL(blob);
 
+      const extension =
+        outputType === 'image/webp'
+        ? 'webp'
+        : 'jpg';
+
       downloadLink.href = url;
+
+      downloadLink.download =
+        'webbag-compressed.' + extension;
+
       downloadLink.style.display = 'block';
 
-    }, 'image/jpeg', quality);
+    }, outputType, quality);
 
   };
 
