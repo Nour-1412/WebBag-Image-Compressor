@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ضغط الصور مجانًا أونلاين | WebBag</title>
+
+<meta name="description" content="أداة مجانية لضغط الصور وتقليل حجمها مع الحفاظ على الجودة. تدعم JPG وPNG وWEBP وتعمل مباشرة من المتصفح.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f4f7fc;
+  color:#1e293b;
+  padding:20px;
+}
+
+.container{
+  max-width:800px;
+  margin:auto;
+}
+
+.card{
+  background:#fff;
+  border-radius:24px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+h1{
+  color:#2563eb;
+  text-align:center;
+  margin-bottom:15px;
+  font-size:32px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#64748b;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+
+.upload-box{
+  border:2px dashed #93c5fd;
+  background:#eff6ff;
+  border-radius:20px;
+  padding:40px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.upload-box:hover{
+  background:#dbeafe;
+}
+
+.upload-box p{
+  color:#475569;
+}
+
+input[type=file]{
+  display:none;
+}
+
+.preview{
+  display:none;
+  margin-top:30px;
+}
+
+.preview img{
+  width:100%;
+  max-height:350px;
+  object-fit:contain;
+  border-radius:16px;
+  background:#f8fafc;
+}
+
+.controls{
+  margin-top:25px;
+}
+
+label{
+  display:block;
+  margin-bottom:10px;
+  font-weight:bold;
+}
+
+input[type=range]{
+  width:100%;
+}
+
+.quality-value{
+  text-align:center;
+  margin-top:10px;
+  color:#2563eb;
+  font-weight:bold;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:25px;
+}
+
+.stat-box{
+  background:#f8fafc;
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+}
+
+.stat-box span{
+  display:block;
+  color:#64748b;
+  margin-bottom:8px;
+}
+
+.stat-box strong{
+  font-size:20px;
+}
+
+button{
+  width:100%;
+  margin-top:25px;
+  border:none;
+  background:#2563eb;
+  color:#fff;
+  padding:16px;
+  border-radius:16px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1d4ed8;
+}
+
+#downloadLink{
+  display:none;
+  margin-top:15px;
+  text-align:center;
+  background:#16a34a;
+  color:#fff;
+  text-decoration:none;
+  padding:16px;
+  border-radius:16px;
+}
+
+.note{
+  margin-top:20px;
+  text-align:center;
+  color:#64748b;
+  font-size:14px;
+  line-height:1.8;
+}
+
+@media(max-width:600px){
+
+  .card{
+    padding:20px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:26px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card">
+
+    <h1>ضغط الصور مجانًا</h1>
+
+    <p class="subtitle">
+      قلّل حجم صورك مع الحفاظ على الجودة، وحسّن سرعة موقعك وتجربة المستخدم.
+    </p>
+
+    <label class="upload-box" for="imageInput">
+      <p>اضغط لاختيار صورة أو اسحبها هنا</p>
+    </label>
+
+    <input type="file" id="imageInput" accept="image/*">
+
+    <div class="preview" id="previewSection">
+
+      <img id="previewImage" alt="معاينة الصورة">
+
+      <div class="controls">
+
+        <label for="qualityRange">
+          مستوى الجودة
+        </label>
+
+        <input type="range" id="qualityRange" min="10" max="100" value="80">
+
+        <div class="quality-value">
+          <span id="qualityText">80%</span>
+        </div>
+
+      </div>
+
+      <div class="stats">
+
+        <div class="stat-box">
+          <span>الحجم الأصلي</span>
+          <strong id="originalSize">0 KB</strong>
+        </div>
+
+        <div class="stat-box">
+          <span>الحجم بعد الضغط</span>
+          <strong id="compressedSize">0 KB</strong>
+        </div>
+
+      </div>
+
+      <button id="compressBtn">
+        ضغط الصورة
+      </button>
+
+      <a id="downloadLink" download="webbag-compressed.jpg">
+        تنزيل الصورة المضغوطة
+      </a>
+
+    </div>
+
+    <p class="note">
+      تدعم الأداة JPG وPNG وWEBP وتعمل بالكامل داخل متصفحك دون رفع الصور إلى أي خادم.
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+const imageInput = document.getElementById('imageInput');
+const previewSection = document.getElementById('previewSection');
+const previewImage = document.getElementById('previewImage');
+
+const qualityRange = document.getElementById('qualityRange');
+const qualityText = document.getElementById('qualityText');
+
+const originalSize = document.getElementById('originalSize');
+const compressedSize = document.getElementById('compressedSize');
+
+const compressBtn = document.getElementById('compressBtn');
+const downloadLink = document.getElementById('downloadLink');
+
+let selectedFile;
+
+qualityRange.addEventListener('input', () => {
+  qualityText.textContent = qualityRange.value + '%';
+});
+
+imageInput.addEventListener('change', e => {
+
+  selectedFile = e.target.files[0];
+
+  if(!selectedFile) return;
+
+  previewImage.src = URL.createObjectURL(selectedFile);
+
+  originalSize.textContent =
+    (selectedFile.size / 1024).toFixed(1) + ' KB';
+
+  compressedSize.textContent = '—';
+
+  downloadLink.style.display = 'none';
+
+  previewSection.style.display = 'block';
+});
+
+compressBtn.addEventListener('click', () => {
+
+  if(!selectedFile){
+    alert('يرجى اختيار صورة أولاً');
+    return;
+  }
+
+  const quality = qualityRange.value / 100;
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const img = new Image();
+
+  img.onload = () => {
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    ctx.drawImage(img, 0, 0);
+
+    canvas.toBlob(blob => {
+
+      compressedSize.textContent =
+        (blob.size / 1024).toFixed(1) + ' KB';
+
+      const url = URL.createObjectURL(blob);
+
+      downloadLink.href = url;
+      downloadLink.style.display = 'block';
+
+    }, 'image/jpeg', quality);
+
+  };
+
+  img.src = URL.createObjectURL(selectedFile);
+
+});
+</script>
+
+</body>
+</html>
