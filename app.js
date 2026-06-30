@@ -86,6 +86,10 @@ qualityRange.addEventListener("input", () => {
 
     qualityValue.textContent = qualityRange.value + "%";
 
+    if (!currentFile) return;
+
+    imageInput.dispatchEvent(new Event("change"));
+
 });
     const arr = dataURL.split(",");
 
