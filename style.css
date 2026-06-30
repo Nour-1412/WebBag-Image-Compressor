@@ -503,4 +503,25 @@ img{
 
    }
 }
+.preview-section{
+    margin-top:40px;
+}
+
+.preview-card{
+    background:#111827;
+    border-radius:20px;
+    padding:20px;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.preview-card img{
+    width:100%;
+    max-height:350px;
+    object-fit:contain;
+    border-radius:12px;
+}
+
+.image-info{
+    margin-top:15px;
+}
 
