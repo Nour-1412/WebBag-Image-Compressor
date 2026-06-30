@@ -37,7 +37,33 @@ img.onload = () => {
     const compressedData = canvas.toDataURL("image/jpeg", 0.7);
 
     compressedPreview.src = compressedData;
+    
+const compressedBlob = dataURLToBlob(compressedData);
 
+const newSize = compressedBlob.size;
+
+compressedSize.textContent =
+    "Size: " + (newSize / 1024).toFixed(1) + " KB";
+
+const percent =
+    ((file.size - newSize) / file.size) * 100;
+
+savedPercent.textContent =
+    "Saved: " + percent.toFixed(1) + "%";
+
+downloadBtn.style.display = "inline-flex";
+
+downloadBtn.onclick = () => {
+
+    const link = document.createElement("a");
+
+    link.href = compressedData;
+
+    link.download = "compressed-image.jpg";
+
+    link.click();
+
+};
 };
 
 img.src = URL.createObjectURL(file);
@@ -49,3 +75,24 @@ const compressedSize = document.getElementById("compressedSize");
 const savedPercent = document.getElementById("savedPercent");
 
 const downloadBtn = document.getElementById("downloadBtn");
+function dataURLToBlob(dataURL) {
+
+    const arr = dataURL.split(",");
+
+    const mime = arr[0].match(/:(.*?);/)[1];
+
+    const bstr = atob(arr[1]);
+
+    let n = bstr.length;
+
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+
+        u8arr[n] = bstr.charCodeAt(n);
+
+    }
+
+    return new Blob([u8arr], { type: mime });
+
+}
