@@ -106,7 +106,60 @@
 
   </section>
   <section class="compressor" id="compressor">
-<section class="preview-section">
+
+
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Upload Your Image</h2>
+
+            <p>
+                Drag & drop your image or click the area below to select a file.
+            </p>
+
+        </div>
+
+        <div class="upload-box" id="dropArea">
+
+            <input
+                type="file"
+                id="imageInput"
+                accept="image/png, image/jpeg, image/webp"
+                hidden>
+
+            <div class="upload-content">
+
+                <div class="upload-icon">
+                    📁
+                </div>
+
+                <h3>
+                    Drag & Drop Image Here
+                </h3>
+
+                <p>
+                    Supports JPG, PNG and WebP
+                </p>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="selectImage">
+
+                    Choose Image
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+              </section>
+      <section class="preview-section">
 
     <div class="container">
 
@@ -158,54 +211,13 @@
 
     </div>
 
-</section>
-    <div class="container">
+      </section>
+      </main>
 
-        <div class="section-title">
+<script src="app.js"></script>
 
-            <h2>Upload Your Image</h2>
+</body>
 
-            <p>
-                Drag & drop your image or click the area below to select a file.
-            </p>
+</html>
 
-        </div>
-
-        <div class="upload-box" id="dropArea">
-
-            <input
-                type="file"
-                id="imageInput"
-                accept="image/png, image/jpeg, image/webp"
-                hidden>
-
-            <div class="upload-content">
-
-                <div class="upload-icon">
-                    📁
-                </div>
-
-                <h3>
-                    Drag & Drop Image Here
-                </h3>
-
-                <p>
-                    Supports JPG, PNG and WebP
-                </p>
-
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    id="selectImage">
-
-                    Choose Image
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-              </section>
+      
