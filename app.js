@@ -75,8 +75,15 @@ const compressedSize = document.getElementById("compressedSize");
 const savedPercent = document.getElementById("savedPercent");
 
 const downloadBtn = document.getElementById("downloadBtn");
-function dataURLToBlob(dataURL) {
+const qualityRange = document.getElementById("qualityRange");
+const qualityValue = document.getElementById("qualityValue");
 
+function dataURLToBlob(dataURL) {
+qualityRange.addEventListener("input", () => {
+
+    qualityValue.textContent = qualityRange.value + "%";
+
+});
     const arr = dataURL.split(",");
 
     const mime = arr[0].match(/:(.*?);/)[1];
