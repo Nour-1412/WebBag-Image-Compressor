@@ -13,7 +13,7 @@ selectImage.addEventListener("click", () => {
 imageInput.addEventListener("change", () => {
 
     const file = imageInput.files[0];
-
+currentFile = file;
     if (!file) return;
 
     originalPreview.src = URL.createObjectURL(file);
@@ -80,7 +80,7 @@ const savedPercent = document.getElementById("savedPercent");
 const downloadBtn = document.getElementById("downloadBtn");
 const qualityRange = document.getElementById("qualityRange");
 const qualityValue = document.getElementById("qualityValue");
-
+let currentFile = null;
 function dataURLToBlob(dataURL) {
 qualityRange.addEventListener("input", () => {
 
