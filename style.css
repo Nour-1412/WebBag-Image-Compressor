@@ -524,4 +524,51 @@ img{
 .image-info{
     margin-top:15px;
 }
+/* ===========================
+   QUALITY
+=========================== */
+
+.quality-box{
+
+    max-width:850px;
+
+    margin:30px auto 0;
+
+    background:#111827;
+
+    padding:20px;
+
+    border-radius:16px;
+
+}
+
+.quality-box label{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+    font-weight:600;
+
+}
+
+#qualityValue{
+
+    color:#06B6D4;
+
+    font-weight:700;
+
+}
+
+#qualityRange{
+
+    width:100%;
+
+    cursor:pointer;
+
+}
 
