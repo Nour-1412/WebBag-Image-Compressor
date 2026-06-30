@@ -12,7 +12,8 @@ selectImage.addEventListener("click", () => {
 
 // عند اختيار صورة
 imageInput.addEventListener("change", () => {
-
+loadingText.style.display = "block";
+downloadBtn.style.display = "none";
     const file = imageInput.files[0];
 currentFile = file;
     if (!file) return;
@@ -79,6 +80,7 @@ downloadBtn.onclick = () => {
 
 };
 };
+    loadingText.style.display = "none";
 
 img.src = URL.createObjectURL(file);
 });
@@ -90,6 +92,7 @@ const compressedFormat = document.getElementById("compressedFormat");
 const savedPercent = document.getElementById("savedPercent");
 
 const downloadBtn = document.getElementById("downloadBtn");
+const loadingText = document.getElementById("loadingText");
 const qualityRange = document.getElementById("qualityRange");
 const qualityValue = document.getElementById("qualityValue");
 let currentFile = null;
