@@ -34,7 +34,10 @@ img.onload = () => {
 
     ctx.drawImage(img, 0, 0);
 
-    const compressedData = canvas.toDataURL("image/jpeg", 0.7);
+  const compressedData = canvas.toDataURL(
+    "image/jpeg",
+    qualityRange.value / 100
+);  
 
     compressedPreview.src = compressedData;
     
