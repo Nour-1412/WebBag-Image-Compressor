@@ -3,7 +3,8 @@ const selectImage = document.getElementById("selectImage");
 
 const originalPreview = document.getElementById("originalPreview");
 const originalSize = document.getElementById("originalSize");
-
+const originalResolution = document.getElementById("originalResolution");
+const originalFormat = document.getElementById("originalFormat");
 // فتح نافذة اختيار الصورة
 selectImage.addEventListener("click", () => {
     imageInput.click();
@@ -27,7 +28,17 @@ const ctx = canvas.getContext("2d");
 const img = new Image();
 
 img.onload = () => {
+originalResolution.textContent =
+    "Resolution: " + img.width + " × " + img.height;
 
+compressedResolution.textContent =
+    "Resolution: " + img.width + " × " + img.height;
+
+originalFormat.textContent =
+    "Format: " + file.type.replace("image/", "").toUpperCase();
+
+compressedFormat.textContent =
+    "Format: JPG";
     canvas.width = img.width;
 
     canvas.height = img.height;
@@ -74,7 +85,8 @@ img.src = URL.createObjectURL(file);
 const compressedPreview = document.getElementById("compressedPreview");
 
 const compressedSize = document.getElementById("compressedSize");
-
+const compressedResolution = document.getElementById("compressedResolution");
+const compressedFormat = document.getElementById("compressedFormat");
 const savedPercent = document.getElementById("savedPercent");
 
 const downloadBtn = document.getElementById("downloadBtn");
