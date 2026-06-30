@@ -318,51 +318,7 @@ compressBtn.addEventListener('click', () => {
         return;
       }
 
-      const originalKB = selectedFile.size / 1024;
-      const compressedKB = blob.size / 1024;
-
-      originalSize.textContent =
-        originalKB.toFixed(1) + ' KB';
-
-      compressedSize.textContent =
-        compressedKB.toFixed(1) + ' KB';
-
-      const difference =
-        ((originalKB - compressedKB) / originalKB) * 100;
-
-      if(difference > 0){
-
-        savingBox.style.display = 'block';
-
-        savingBox.textContent =
-          'تم تقليل الحجم بنسبة ' +
-          difference.toFixed(1) + '%';
-      }else{
-
-        savingBox.style.display = 'block';
-
-        savingBox.textContent =
-          'الصورة الأصلية مضغوطة بالفعل.';
-      }
-
-      const url = URL.createObjectURL(blob);
-
-      const extension =
-        outputType === 'image/webp'
-        ? 'webp'
-        : 'jpg';
-
-      downloadLink.href = url;
-
-      downloadLink.download =
-        'webbag-compressed.' + extension;
-
-      downloadLink.style.display = 'block';
-
-    }, outputType, quality);
-
-  };
-
+      const originalKB = 
   img.src = URL.createObjectURL(selectedFile);
 
 });
