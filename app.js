@@ -105,13 +105,10 @@ downloadBtn.onclick = () => {
     link.download = "compressed-image.jpg";
 
     link.click();
-
+loadingText.style.display = "none";
 };
 };
-    loadingText.style.display = "none";
-
-img.src = URL.createObjectURL(file);
-});
+    
 const compressedPreview = document.getElementById("compressedPreview");
 
 const compressedSize = document.getElementById("compressedSize");
