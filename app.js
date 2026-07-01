@@ -127,15 +127,8 @@ loadingText.style.display = "none";
 
   
 function dataURLToBlob(dataURL) {
-qualityRange.addEventListener("input", () => {
 
-    qualityValue.textContent = qualityRange.value + "%";
 
-    if (!currentFile) return;
-
-    imageInput.dispatchEvent(new Event("change"));
-
-});
     const arr = dataURL.split(",");
 
     const mime = arr[0].match(/:(.*?);/)[1];
@@ -155,7 +148,15 @@ qualityRange.addEventListener("input", () => {
     return new Blob([u8arr], { type: mime });
 
 }
+qualityRange.addEventListener("input", () => {
 
+    qualityValue.textContent = qualityRange.value + "%";
+
+    if (!currentFile) return;
+
+    imageInput.dispatchEvent(new Event("change"));
+
+});
 // ==========================
 // DRAG & DROP
 // ==========================
