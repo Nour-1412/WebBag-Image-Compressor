@@ -8,6 +8,7 @@ const originalFormat = document.getElementById("originalFormat");
 const formatSelect = document.getElementById("formatSelect");
 const resizeWidth = document.getElementById("resizeWidth");
 const resizeHeight = document.getElementById("resizeHeight");
+const resetBtn = document.getElementById("resetBtn");
 // فتح نافذة اختيار الصورة
 selectImage.addEventListener("click", () => {
     imageInput.click();
@@ -160,6 +161,7 @@ qualityRange.addEventListener("input", () => {
 dropArea.addEventListener("dragover", (e) => {
 
     e.preventDefault();
+    
 
     dropArea.classList.add("dragging");
 
@@ -180,5 +182,42 @@ dropArea.addEventListener("drop", (e) => {
     imageInput.files = e.dataTransfer.files;
 
     imageInput.dispatchEvent(new Event("change"));
+
+});
+// ==========================
+// RESET
+// ==========================
+
+resetBtn.addEventListener("click", () => {
+
+    imageInput.value = "";
+
+    originalPreview.src = "";
+
+    compressedPreview.src = "";
+
+    originalSize.textContent = "";
+
+    compressedSize.textContent = "";
+
+    originalResolution.textContent = "";
+
+    compressedResolution.textContent = "";
+
+    originalFormat.textContent = "";
+
+    compressedFormat.textContent = "";
+
+    savedPercent.textContent = "";
+
+    qualityRange.value = 70;
+
+    qualityValue.textContent = "70%";
+
+    formatSelect.value = "image/jpeg";
+
+    resizeWidth.value = "";
+
+    resizeHeight.value = "";
 
 });
