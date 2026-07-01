@@ -600,5 +600,29 @@ img{
     transition: 0.3s;
 
 }
+.aspect-ratio-option{
 
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:12px 0;
+
+    color:#fff;
+
+    font-size:15px;
+
+}
+
+.aspect-ratio-option input{
+
+    width:18px;
+
+    height:18px;
+
+    cursor:pointer;
+
+}
 
