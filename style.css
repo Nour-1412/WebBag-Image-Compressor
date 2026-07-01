@@ -571,4 +571,20 @@ img{
     cursor:pointer;
 
 }
+/* ==========================
+   DRAG & DROP EFFECT
+========================== */
+
+.upload-box.dragging {
+
+    border-color: #4CAF50;
+
+    background: #f0fff4;
+
+    transform: scale(1.02);
+
+    transition: 0.3s;
+
+}
+
 
