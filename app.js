@@ -1,5 +1,6 @@
 const imageInput = document.getElementById("imageInput");
 const selectImage = document.getElementById("selectImage");
+const dropArea = document.getElementById("dropArea");
 const compressedPreview = document.getElementById("compressedPreview");
 
 const compressedSize = document.getElementById("compressedSize");
