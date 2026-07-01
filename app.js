@@ -5,6 +5,7 @@ const originalPreview = document.getElementById("originalPreview");
 const originalSize = document.getElementById("originalSize");
 const originalResolution = document.getElementById("originalResolution");
 const originalFormat = document.getElementById("originalFormat");
+const formatSelect = document.getElementById("formatSelect");
 // فتح نافذة اختيار الصورة
 selectImage.addEventListener("click", () => {
     imageInput.click();
@@ -38,8 +39,10 @@ compressedResolution.textContent =
 originalFormat.textContent =
     "Format: " + file.type.replace("image/", "").toUpperCase();
 
+const selectedFormat = formatSelect.value;
+
 compressedFormat.textContent =
-    "Format: JPG";
+    "Format: " + selectedFormat.replace("image/", "").toUpperCase();
     canvas.width = img.width;
 
     canvas.height = img.height;
@@ -47,9 +50,9 @@ compressedFormat.textContent =
     ctx.drawImage(img, 0, 0);
 
   const compressedData = canvas.toDataURL(
-    "image/jpeg",
+    selectedFormat,
     qualityRange.value / 100
-);  
+);
 
     compressedPreview.src = compressedData;
     
