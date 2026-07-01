@@ -1,6 +1,17 @@
 const imageInput = document.getElementById("imageInput");
 const selectImage = document.getElementById("selectImage");
+const compressedPreview = document.getElementById("compressedPreview");
 
+const compressedSize = document.getElementById("compressedSize");
+const compressedResolution = document.getElementById("compressedResolution");
+const compressedFormat = document.getElementById("compressedFormat");
+const savedPercent = document.getElementById("savedPercent");
+
+const downloadBtn = document.getElementById("downloadBtn");
+const loadingText = document.getElementById("loadingText");
+const qualityRange = document.getElementById("qualityRange");
+const qualityValue = document.getElementById("qualityValue");
+let currentFile = null;
 const originalPreview = document.getElementById("originalPreview");
 const originalSize = document.getElementById("originalSize");
 const originalResolution = document.getElementById("originalResolution");
@@ -113,18 +124,7 @@ loadingText.style.display = "none";
 };
 };
     
-const compressedPreview = document.getElementById("compressedPreview");
 
-const compressedSize = document.getElementById("compressedSize");
-const compressedResolution = document.getElementById("compressedResolution");
-const compressedFormat = document.getElementById("compressedFormat");
-const savedPercent = document.getElementById("savedPercent");
-
-const downloadBtn = document.getElementById("downloadBtn");
-const loadingText = document.getElementById("loadingText");
-const qualityRange = document.getElementById("qualityRange");
-const qualityValue = document.getElementById("qualityValue");
-let currentFile = null;
   
 function dataURLToBlob(dataURL) {
 qualityRange.addEventListener("input", () => {
