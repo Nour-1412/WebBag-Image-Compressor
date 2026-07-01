@@ -102,7 +102,9 @@ downloadBtn.onclick = () => {
 
     link.href = compressedData;
 
-    link.download = "compressed-image.jpg";
+    const extension = selectedFormat.split("/")[1];
+
+link.download = "compressed-image." + extension;
 
     link.click();
 loadingText.style.display = "none";
