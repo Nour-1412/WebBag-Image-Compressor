@@ -6,6 +6,8 @@ const originalSize = document.getElementById("originalSize");
 const originalResolution = document.getElementById("originalResolution");
 const originalFormat = document.getElementById("originalFormat");
 const formatSelect = document.getElementById("formatSelect");
+const resizeWidth = document.getElementById("resizeWidth");
+const resizeHeight = document.getElementById("resizeHeight");
 // فتح نافذة اختيار الصورة
 selectImage.addEventListener("click", () => {
     imageInput.click();
@@ -43,9 +45,14 @@ const selectedFormat = formatSelect.value;
 
 compressedFormat.textContent =
     "Format: " + selectedFormat.replace("image/", "").toUpperCase();
-    canvas.width = img.width;
+    canvas.width = resizeWidth.value
+    ? Number(resizeWidth.value)
+    : img.width;
 
-    canvas.height = img.height;
+canvas.height = resizeHeight.value
+    ? Number(resizeHeight.value)
+    : img.height;
+
 
     ctx.drawImage(img, 0, 0);
 
