@@ -36,7 +36,7 @@ originalResolution.textContent =
     "Resolution: " + img.width + " × " + img.height;
 
 compressedResolution.textContent =
-    "Resolution: " + img.width + " × " + img.height;
+    "Resolution: " + canvas.width + " × " + canvas.height;
 
 originalFormat.textContent =
     "Format: " + file.type.replace("image/", "").toUpperCase();
