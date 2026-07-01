@@ -232,19 +232,6 @@ img{
 }
 
 .btn-primary{
-   .btn-secondary {
-
-    background: #6c757d;
-
-    color: white;
-
-}
-
-.btn-secondary:hover {
-
-    background: #5a6268;
-
-}
 
     background:#4F46E5;
 
@@ -261,6 +248,20 @@ img{
 }
 
 .btn-secondary{
+
+    background:#6c757d;
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+
+.btn-secondary:hover{
+
+    background:#5a6268;
+
+}
 
     border:1px solid rgba(255,255,255,.15);
 
