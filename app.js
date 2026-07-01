@@ -125,3 +125,33 @@ qualityRange.addEventListener("input", () => {
     return new Blob([u8arr], { type: mime });
 
 }
+
+// ==========================
+// DRAG & DROP
+// ==========================
+
+dropArea.addEventListener("dragover", (e) => {
+
+    e.preventDefault();
+
+    dropArea.classList.add("dragging");
+
+});
+
+dropArea.addEventListener("dragleave", () => {
+
+    dropArea.classList.remove("dragging");
+
+});
+
+dropArea.addEventListener("drop", (e) => {
+
+    e.preventDefault();
+
+    dropArea.classList.remove("dragging");
+
+    imageInput.files = e.dataTransfer.files;
+
+    imageInput.dispatchEvent(new Event("change"));
+
+});
