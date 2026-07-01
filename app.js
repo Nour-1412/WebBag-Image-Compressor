@@ -42,6 +42,17 @@ originalFormat.textContent =
     "Format: " + file.type.replace("image/", "").toUpperCase();
 
 const selectedFormat = formatSelect.value;
+    if (!resizeWidth.value) {
+
+    resizeWidth.value = img.width;
+
+}
+
+if (!resizeHeight.value) {
+
+    resizeHeight.value = img.height;
+
+}
 
 compressedFormat.textContent =
     "Format: " + selectedFormat.replace("image/", "").toUpperCase();
@@ -54,7 +65,13 @@ canvas.height = resizeHeight.value
     : img.height;
 
 
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(
+    img,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+);
 
   const compressedData = canvas.toDataURL(
     selectedFormat,
