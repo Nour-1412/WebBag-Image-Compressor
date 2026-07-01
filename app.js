@@ -8,7 +8,7 @@ const originalFormat = document.getElementById("originalFormat");
 const formatSelect = document.getElementById("formatSelect");
 const resizeWidth = document.getElementById("resizeWidth");
 const resizeHeight = document.getElementById("resizeHeight");
-const keepAspect = document.getElementById("keepAspect");
+
 const resetBtn = document.getElementById("resetBtn");
 // فتح نافذة اختيار الصورة
 selectImage.addEventListener("click", () => {
@@ -34,8 +34,7 @@ const ctx = canvas.getContext("2d");
 const img = new Image();
 
 img.onload = () => {
-    originalWidth = img.width;
-originalHeight = img.height;
+    
 originalResolution.textContent =
     "Resolution: " + img.width + " × " + img.height;
 
@@ -126,8 +125,7 @@ const loadingText = document.getElementById("loadingText");
 const qualityRange = document.getElementById("qualityRange");
 const qualityValue = document.getElementById("qualityValue");
 let currentFile = null;
-  let originalWidth = 0;
-let originalHeight = 0;  
+  
 function dataURLToBlob(dataURL) {
 qualityRange.addEventListener("input", () => {
 
