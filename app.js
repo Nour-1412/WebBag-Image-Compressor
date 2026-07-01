@@ -111,6 +111,7 @@ savedPercent.textContent =
 downloadBtn.style.display = "inline-flex";
 
 downloadBtn.onclick = () => {
+    
 
     const link = document.createElement("a");
 
@@ -125,7 +126,8 @@ loadingText.style.display = "none";
 };
 };
     
-
+img.src = URL.createObjectURL(file);
+    });
   
 function dataURLToBlob(dataURL) {
 
